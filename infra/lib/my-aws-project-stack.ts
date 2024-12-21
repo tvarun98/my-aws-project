@@ -35,5 +35,12 @@ export class MyAwsProjectStack extends cdk.Stack {
 
     const getPassword = api.root.addResource('{userID}');
     getPassword.addMethod('GET', new apigateway.LambdaIntegration(lambdaFunction));
+    
+    
+    new cdk.CfnOutput(this, 'MyApiEndpointUrl', {
+      value: api.url,
+      description: 'The endpoint of the original API Gateway',
+      exportName: 'MyApiEndpointUrl' // add exportName here
+    });
   }
 }
